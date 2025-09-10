@@ -1,0 +1,67 @@
+# Alembic Migrations - Changes Required to env.py
+
+## Required Changes to Make Alembic Work with FastAPI and SQLModel
+
+1. **Add System Path Configuration**
+   ```python
+   import sys
+   from pathlib import Path
+   
+   # Add project root to sys.path to enable imports from app
+   sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+   ```
+
+2. **Import Settings and SQLModel**
+   ```python
+   from app.core.config import get_settings
+   from sqlmodel import SQLModel
+   
+   # Get settings instance
+   settings = get_settings()
+   ```
+
+3. **Configure Database URL**
+   ```python
+   # Set the DB URL in config
+   config.set_main_option("sqlalchemy.url", str(settings.database_url))
+   ```
+
+4. **Set Target Metadata to SQLModel**
+   ```python
+   # Change from None to SQLModel.metadata
+   target_metadata = SQLModel.metadata
+   ```
+
+5. **Update Offline Migrations**
+   ```python
+   # Change from:
+   # url = config.get_main_option("sqlalchemy.url")
+   # To:
+   url = settings.database_url
+   ```
+
+6. **Fix Online Migrations** (to fix "KeyError: 'url'" error)
+   ```python
+   # Need to replace this code:
+   connectable = engine_from_config(
+       config.get_section(config.config_ini_section, {}),
+       prefix="sqlalchemy.",
+       poolclass=pool.NullPool,
+   )
+   
+   # With code that uses create_engine directly:
+   from sqlalchemy import create_engine
+   connectable = create_engine(settings.database_url)
+   ```
+
+7. **Enhance Context Configuration**
+   ```python
+   # Add compare_type=True for better column type detection
+   context.configure(
+       connection=connection, 
+       target_metadata=target_metadata,
+       compare_type=True,
+   )
+   ```
+
+These changes allow Alembic to properly connect to your database using settings from your FastAPI app and create migrations based on your SQLModel models.
