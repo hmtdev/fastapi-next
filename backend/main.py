@@ -7,7 +7,6 @@ from fastapi.responses import RedirectResponse
 from app.core.logger import logger
 from app.api import api_v1
 
-
 settings = get_settings()
 
 
