@@ -16,4 +16,4 @@ class User(SQLModel, table=True):
     email: EmailStr = Field(unique=True, nullable=False)
     hashed_password: str
     is_active: bool = True
-    role: Role = Field(default=Role.ADMIN, nullable=False)
+    role: Role = Field(default=Role.USER, nullable=False)

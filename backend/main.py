@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 import json
 from app.core.config import get_settings
-from app.core.database import init_db
+from app.core.database import init_db, init_admin
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from app.core.logger import logger
@@ -14,6 +14,7 @@ settings = get_settings()
 async def life_span(app: FastAPI):
     logger.info("Start App")
     init_db()
+    init_admin()
     logger.info("Create Database Successfully !!")
     yield
 

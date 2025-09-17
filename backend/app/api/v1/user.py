@@ -1,15 +1,20 @@
+from typing import Annotated
+
+from app.core.auth_utils import get_password_hash
+from app.core.config import get_settings
+from app.core.database import get_session
+from app.models.user import Role, User
+from app.schemas.user import UserBase, UserCreate
+from app.services.auth_service import get_admin_user, get_current_user
+from app.services.user_services import create_user, get_users
 from fastapi import APIRouter, Depends
 from sqlmodel import Session
-from app.core.database import get_session
-from app.services.user_services import get_users
-from app.core.config import get_settings
-from app.models.user import User, Role
 
-router = APIRouter(prefix="/users", tags=["user"])
+router = APIRouter(prefix="/users", tags=["User"])
 settings = get_settings()
 
 
-@router.get("", include_in_schema=True)
+@router.get("", include_in_schema=True, response_model=list[UserBase])
 def get_all_users(db: Session = Depends(get_session)):
     """
     Get all users from the database
@@ -18,7 +23,7 @@ def get_all_users(db: Session = Depends(get_session)):
     if not users:
         new_user = User(
             username=settings.default_username,
-            hashed_password=settings.default_password,
+            hashed_password=get_password_hash(settings.default_password),
             email=settings.admin_email,
             is_active=True,
             role=Role.ADMIN,
@@ -26,7 +31,7 @@ def get_all_users(db: Session = Depends(get_session)):
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
-    return {"status": "ok", "data": users}
+    return [UserBase.model_validate(u) for u in users]
 
 
 @router.get("/drop-table")
@@ -36,8 +41,8 @@ def drop_user_table(db: Session = Depends(get_session)):
     This endpoint should be disabled in production.
     """
     # Import necessary SQLAlchemy components
-    from sqlalchemy import text
     from app.models.user import User
+    from sqlalchemy import text
 
     try:
         # Drop the table using raw SQL for force drop
@@ -52,3 +57,16 @@ def drop_user_table(db: Session = Depends(get_session)):
     except Exception as e:
         db.rollback()
         return {"status": "error", "message": str(e)}
+
+
+@router.post("/register", response_model=UserBase)
+async def create_user_by_email(
+    user: UserCreate, db: Session = Depends(get_session), admin=Depends(get_admin_user)
+):
+    new_user = create_user(db, user)
+    return UserBase.model_validate(new_user)
+
+
+@router.get("/me", response_model=UserBase)
+async def get_user_me(current_user: Annotated[User, Depends(get_current_user)]):
+    return UserBase.model_validate(current_user)
