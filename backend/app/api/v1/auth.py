@@ -1,7 +1,5 @@
-from datetime import timedelta
-
 from app.core.database import get_session
-from app.schemas.auth import Token
+from app.schemas.auth import Token, TokenRefresh
 from app.services.auth_service import (
     authenticate_user,
     create_access_token,
@@ -12,7 +10,7 @@ from app.services.auth_service import (
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlmodel import Session
-
+from fastapi.responses import Response
 from app.services.user_services import get_user_by_email
 
 router = APIRouter(tags=["Auth"], prefix="/auth")
@@ -20,6 +18,7 @@ router = APIRouter(tags=["Auth"], prefix="/auth")
 
 @router.post("/token")
 async def login_for_access_token(
+    response: Response,
     db: Session = Depends(get_session),
     form: OAuth2PasswordRequestForm = Depends(),
 ) -> Token:
@@ -32,6 +31,13 @@ async def login_for_access_token(
         )
     access_token = create_access_token(data={"sub": user.email})
     refresh_token = create_refresh_token(data={"sub": user.email})
+    response.set_cookie(
+        key="refresh_token",
+        value=refresh_token,
+        httponly=True,
+        secure=True,
+        max_age=60 * 60 * 24 * 30,
+    )
     return Token(access_token=access_token, refresh_token=refresh_token)
 
 
@@ -44,7 +50,7 @@ async def refresh_token(refresh_token, db: Session = Depends(get_session)):
             status_code=status.HTTP_400_BAD_REQUEST, detail="Refresh token invalid"
         )
     access_token = create_access_token(data={"sub": user.email})
-    return Token(access_token=access_token, refresh_token=refresh_token)
+    return TokenRefresh(access_token=access_token, refresh_token=refresh_token)
 
 
 @router.post("/token/verify")

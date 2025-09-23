@@ -7,6 +7,7 @@ from fastapi.responses import RedirectResponse
 from app.core.logger import logger
 from app.api import api_v1
 from fastapi.middleware.cors import CORSMiddleware
+from app.services.genmini_service import gemini_service
 
 settings = get_settings()
 
@@ -16,6 +17,7 @@ async def life_span(app: FastAPI):
     logger.info("Start App")
     init_db()
     init_admin()
+    gemini_service.initialize()
     logger.info("Create Database Successfully !!")
     yield
 
