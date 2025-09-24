@@ -17,3 +17,4 @@ class User(SQLModel, table=True):
     hashed_password: str
     is_active: bool = True
     role: Role = Field(default=Role.USER, nullable=False)
+    avatar: str = Field(nullable=True)

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 60
     ALGORITHM: str = "HS256"
     GENMINI_API_KEY: str
+    SUPABASE_URL: str
+    SUPABASE_KEY: str
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

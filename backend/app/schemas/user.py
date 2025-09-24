@@ -14,7 +14,7 @@ class UserBase(BaseModel):
     email: EmailStr
     is_active: bool
     role: Role
-
+    avatar: Optional[str]
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -22,4 +22,5 @@ class UserCreate(BaseModel):
     username: str
     password: str
     email: EmailStr
+    avatar: Optional[str]
     role: Optional[Role] = Role.USER

@@ -60,9 +60,7 @@ def drop_user_table(db: Session = Depends(get_session)):
 
 
 @router.post("/register", response_model=UserBase)
-async def create_user_by_email(
-    user: UserCreate, db: Session = Depends(get_session), admin=Depends(get_admin_user)
-):
+async def create_user_by_email(user: UserCreate, db: Session = Depends(get_session)):
     new_user = create_user(db, user)
     return UserBase.model_validate(new_user)
 

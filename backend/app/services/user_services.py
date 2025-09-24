@@ -39,6 +39,7 @@ def create_user(db: Session, user: UserCreate):
         hashed_password=get_password_hash(user.password),
         email=user.email,
         role=user.role,
+        avatar=user.avatar,
     )
     db.add(new_user)
     try:
