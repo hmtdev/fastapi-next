@@ -3,7 +3,7 @@ from typing import Annotated
 from app.core.auth_utils import get_password_hash
 from app.core.config import get_settings
 from app.core.database import get_session
-from app.models.user import Role, User
+from app.models.user import Role, User, UserLevelDetail
 from app.schemas.user import UserBase, UserCreate
 from app.services.auth_service import get_admin_user, get_current_user
 from app.services.user_services import create_user, get_users
@@ -47,6 +47,8 @@ def drop_user_table(db: Session = Depends(get_session)):
     try:
         # Drop the table using raw SQL for force drop
         db.exec(text(f'DROP TABLE IF EXISTS "{User.__tablename__}" CASCADE'))
+        db.exec(text(f"DELETE FROM alembic_version"))
+        db.exec(text(f'DROP TABLE IF EXISTS "{UserLevelDetail.__tablename__}" CASCADE'))
         db.commit()
 
         # Alternative approach using SQLAlchemy metadata

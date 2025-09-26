@@ -113,6 +113,7 @@ def verify_refresh_token(token):
 def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)], db: Session = Depends(get_session)
 ):
+    print("asdas", token)
     token_data = verify_access_token(token)
     user = get_user_by_email(db, token_data.email)
     if user is None:

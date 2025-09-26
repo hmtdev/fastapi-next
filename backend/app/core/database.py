@@ -23,6 +23,7 @@ def init_admin():
                 email=settings.admin_email,
                 hashed_password=get_password_hash(settings.default_password),
                 role=Role.ADMIN,
+                is_active=True,
             )
             session.add(admin)
             try:
