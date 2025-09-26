@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-const handler = NextAuth({
+
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -55,6 +56,7 @@ const handler = NextAuth({
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
             role: userData?.role,
+            level: userData?.level,
           };
         } catch (error) {
           console.error("Auth error:", error);
@@ -71,6 +73,7 @@ const handler = NextAuth({
         token.refreshToken = user.refreshToken;
         token.role = user.role;
         token.image = user.image;
+        token.level = user.level;
       }
       return token;
     },
@@ -79,16 +82,20 @@ const handler = NextAuth({
         session.user.accessToken = token.accessToken;
         session.user.refreshToken = token.refreshToken;
         session.user.role = token.role;
+        session.user.level = token.level;
       }
+      console.log("ss from server ", session);
       return session;
     },
   },
   pages: {
     signIn: "/login",
+    session: {
+      strategy: "jwt",
+    },
   },
-  session: {
-    strategy: "jwt",
-  },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

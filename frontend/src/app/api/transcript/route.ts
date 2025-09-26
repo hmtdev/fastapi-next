@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { videoId, videoUrl, language } = await request.json();
+    const { videoUrl, language } = await request.json();
 
     const apiUrl = `${
       process.env.BACKEND_URL || "http://127.0.0.1:8000"

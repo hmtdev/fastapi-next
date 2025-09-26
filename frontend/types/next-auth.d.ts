@@ -11,6 +11,7 @@ declare module "next-auth" {
       role?: string;
       accessToken?: string;
       refreshToken?: string;
+      level?: string;
     };
   }
 
@@ -22,6 +23,7 @@ declare module "next-auth" {
     role?: string;
     accessToken?: string;
     refreshToken?: string;
+    level?: string;
   }
 }
 
@@ -31,5 +33,6 @@ declare module "next-auth/jwt" {
     accessToken?: string;
     refreshToken?: string;
     userId?: string;
+    level?: string;
   }
 }

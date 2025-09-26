@@ -2,10 +2,10 @@ import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
   pages: {
-    signIn: "/login",
+    signIn: "/login", // Trang đăng nhập
   },
 });
 
 export const config = {
-  matcher: ["/", "/:path*", "/dashboard/:path*"],
+  matcher: ["/", "/dashboard/:path*"], // Kiểm tra cả "/" và "/dashboard/*"
 };

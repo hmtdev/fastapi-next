@@ -1,0 +1,166 @@
+Figma UI Design Prompt for an English Learning Website
+Objective
+Design a clean, modern, and user-friendly UI in Figma for an English learning website targeting learners of all levels (beginner, intermediate, advanced). The design should be visually appealing, intuitive, and optimized for both desktop and mobile devices. Each key functionality should be organized into separate pages, with a left-aligned sidebar navigation bar for easy access.
+Target Audience
+
+Primary Users: English learners (students, professionals, casual learners) aged 16–50, with varying proficiency levels.
+Secondary Users: Teachers or tutors looking for resources to support their students.
+User Goals: Learn English effectively through interactive lessons, track progress, engage with a community, and access resources like vocabulary exercises, grammar lessons, and speaking practice.
+
+Design Requirements
+
+Style: Modern, clean, and approachable with a professional yet friendly aesthetic.
+Color Scheme: Use a vibrant yet calming palette (e.g., blues, whites, and accent colors like orange or green) to evoke trust and motivation.
+Typography: Use readable, sans-serif fonts (e.g., Poppins, Roboto, or Open Sans) with clear hierarchy (headings, subheadings, body text).
+Responsiveness: Design for both desktop (1440px) and mobile (375px) layouts, ensuring seamless usability across devices. For mobile, collapse the sidebar into a hamburger menu.
+Accessibility: Ensure sufficient color contrast, clear navigation, and readable font sizes for accessibility compliance.
+
+Sidebar Navigation
+
+Placement: A fixed left sidebar for desktop, collapsing into a hamburger menu for mobile.
+Elements:
+Logo at the top of the sidebar.
+Navigation links to: Home, Courses, Features, Community, Progress, Blog, Login/Signup.
+A search icon for quick content access.
+Language switcher at the bottom.
+
+
+Design Notes: Use icons next to text labels for each nav item. Highlight the active page with a distinct background or border. Ensure the sidebar is 250–300px wide on desktop, with a clean and minimal design.
+
+Pages and Functionalities
+Each functionality is now split into dedicated pages, accessible via the sidebar navigation.
+1. Home Page
+
+Purpose: Welcome users and highlight the platform’s value proposition.
+Elements:
+A full-width hero section with:
+A bold headline (e.g., “Learn English Anytime, Anywhere”).
+A short subheadline (e.g., “Interactive lessons, real-time progress tracking, and a supportive community”).
+A prominent Call-to-Action (CTA) button (e.g., “Start Learning for Free” or “Take a Placement Test”).
+A visually engaging hero image or illustration (e.g., a diverse group of learners or an interactive learning scene).
+
+
+A brief overview of key features with CTAs linking to their respective pages (e.g., “Explore Courses” linking to the Courses page).
+User testimonials or success stories (e.g., “How Maria improved her IELTS score by 2 points!”).
+
+
+Design Notes: Keep the layout clean and engaging, with a focus on guiding users to other pages. Use a full-width hero banner with vibrant visuals.
+
+2. Courses Page
+
+Purpose: Showcase available courses and learning paths.
+Elements:
+A grid or carousel displaying course categories (e.g., Beginner English, Business English, IELTS Preparation, Conversational English).
+Each course card includes:
+Course title.
+Brief description (e.g., “Master everyday conversations in 30 days”).
+Difficulty level (e.g., Beginner, Intermediate, Advanced).
+A “Start Course” or “Learn More” button.
+
+
+Filter options for course type, level, or duration.
+Search bar for finding specific courses.
+
+
+Design Notes: Use a card-based design with hover effects for interactivity. Include progress indicators for logged-in users’ enrolled courses.
+
+3. Features Page
+
+Purpose: Highlight unique tools to engage learners.
+Elements:
+Sections for each feature, including:
+Vocabulary Builder: Interactive flashcards or quizzes.
+Speaking Practice: AI-driven pronunciation feedback or live tutor sessions.
+Grammar Lessons: Step-by-step guides with examples.
+Progress Tracking: Visual dashboards showing learning milestones (links to Progress page for details).
+
+
+Each section includes a brief description, an icon or illustration, and a CTA (e.g., “Try a Vocabulary Quiz”).
+
+
+Design Notes: Use a modular layout with clear sections for each feature. Incorporate visuals like icons or mockups to illustrate functionality.
+
+4. Community Page
+
+Purpose: Foster a sense of community and encourage interaction.
+Elements:
+A discussion forum preview with sample topics (e.g., “Ask questions, share tips, and connect with learners worldwide”).
+A list of active threads or popular posts.
+A CTA to join the community (e.g., “Join the Discussion” or “Start a New Thread”).
+A section for community events (e.g., live Q&A sessions or study groups).
+
+
+Design Notes: Use a clean, forum-style layout with user avatars and topic previews. Include a search bar for finding discussions.
+
+5. Progress Page
+
+Purpose: Allow logged-in users to track their learning progress.
+Elements:
+A personalized welcome message (e.g., “Welcome back, [User Name]!”).
+A detailed dashboard showing:
+Courses in progress with completion percentages.
+Recent achievements or badges (e.g., “Completed 5 Vocabulary Quizzes”).
+Upcoming lessons or tasks (e.g., “Next: Grammar Lesson on Tenses”).
+
+
+A CTA to resume learning (e.g., “Continue Your Lesson”).
+For non-logged-in users, display a mock dashboard with a “Sign Up to Track Progress” CTA.
+
+
+Design Notes: Use charts, progress bars, and badges for visual appeal. Ensure the layout is clean and easy to scan.
+
+6. Blog Page
+
+Purpose: Provide resources and tips for English learners.
+Elements:
+A grid of blog post previews with:
+Post title.
+Short excerpt.
+Thumbnail image.
+Author and date.
+
+
+Categories or tags for filtering (e.g., Grammar Tips, Vocabulary, Exam Prep).
+A search bar for finding specific articles.
+
+
+Design Notes: Use a card-based layout with hover effects. Ensure a clean, readable design for article previews.
+
+7. Footer (Consistent Across All Pages)
+
+Purpose: Provide navigation and additional resources.
+Elements:
+Links to secondary pages (e.g., About Us, Contact, FAQ, Privacy Policy).
+Social media icons linking to the platform’s profiles.
+Newsletter signup form.
+
+
+Design Notes: Keep the footer compact and organized, with clear sections. Place below the main content, ensuring it doesn’t overlap with the sidebar.
+
+Additional Notes
+
+Sidebar Behavior:
+On desktop: Fixed left sidebar, visible at all times.
+On mobile: Collapses into a hamburger menu, expandable on click.
+
+
+Interactivity: Incorporate micro-interactions (e.g., hover effects on buttons, smooth transitions for sidebar toggle) to enhance user experience.
+Branding: Include the logo in the sidebar and ensure consistent color usage across all pages.
+Figma-Specific Instructions:
+Use Figma’s auto-layout feature for responsive design.
+Organize layers clearly with proper naming conventions (e.g., “Home_Hero,” “Courses_Card”).
+Create a component library for reusable elements like buttons, cards, and sidebar items.
+Include separate artboards for each page (desktop and mobile versions).
+Provide an interactive prototype showcasing navigation between pages and key user flows (e.g., clicking a course card to view details).
+
+
+
+Deliverables
+
+A Figma file containing:
+Desktop and mobile versions of all pages (Home, Courses, Features, Community, Progress, Blog).
+A style guide with colors, typography, and components.
+Interactive prototypes for key user flows (e.g., navigating from Home to Courses, interacting with the sidebar).
+
+
+Annotations explaining design choices and interactions.

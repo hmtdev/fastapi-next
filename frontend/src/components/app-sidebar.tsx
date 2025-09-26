@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,36 +13,69 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { Home, Settings, Users } from "lucide-react";
+import {
+  BookOpen,
+  Users,
+  BarChart3,
+  Brain,
+  Trophy,
+  Zap,
+  Tv,
+} from "lucide-react";
 import HeaderSidebar from "./header-sidebar";
 import { NavUser } from "./nav-user";
+import Link from "next/link";
 
 // Menu items
 const items = [
   {
-    title: "Home",
+    id: "Dashboard",
     url: "/dashboard",
-    icon: Home,
+    icon: BarChart3,
+    description: "Overview & Progress",
   },
   {
-    title: "Users",
+    id: "Courses",
     url: "/dashboard/users",
-    icon: Users,
+    icon: BookOpen,
+    description: "Learning Path",
   },
   {
-    title: "Settings",
+    id: "Flashcards",
     url: "/dashboard/settings",
-    icon: Settings,
+    icon: Brain,
+    description: "Memory Training",
   },
   {
-    title: "Shadow",
+    id: "Shadowing",
     url: "/dashboard/shadow",
-    icon: Settings,
+    icon: Tv,
+    description: "Youtube Practice",
+  },
+  {
+    id: "Practice",
+    url: "/dashboard/shadow",
+    icon: Zap,
+    description: "Interactive Tools",
+  },
+  {
+    id: "Community",
+    url: "/dashboard/shadow",
+    icon: Users,
+    description: "Connect & Share",
+  },
+  {
+    id: "Archivements",
+    url: "/dashboard/shadow",
+    icon: Trophy,
+    description: "Goals & Rewards",
   },
 ];
 export default function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const [activeItem, setActiveItem] = useState<string | null>(items[0].id);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -50,16 +84,32 @@ export default function AppSidebar({
       <SidebarSeparator />
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Pages</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-1">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton
+                    asChild
+                    className={
+                      activeItem === item.id
+                        ? "bg-primary text-primary-foreground"
+                        : ""
+                    }
+                    isActive={activeItem === item.id}
+                    onClick={() => setActiveItem(item.id)}
+                  >
+                    <Link
+                      href={item.url}
+                      className="w-full justify-start p-3 h-12"
+                    >
+                      <item.icon className="mr-3 w-12 h-12" />
+                      <div className="flex flex-col items-start">
+                        <div className="font-semibold">{item.id}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {item.description}
+                        </div>
+                      </div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
