@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ArrowRight,
   Award,
-  Badge,
   BookOpen,
   Calendar,
   Clock,
@@ -13,6 +12,8 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import StatsCard from "@/components/stats-card";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
@@ -26,6 +27,28 @@ export default async function Page() {
     }
   );
   const data = await res.json();
+  const stats = [
+    {
+      title: "Lessons Completed",
+      value: data.total_lession_completed,
+      icon: <BookOpen className="h-8 w-8 text-muted-foreground" />,
+    },
+    {
+      title: "Study Time",
+      value: data.total_study_time,
+      icon: <Clock className="h-8 w-8 text-muted-foreground" />,
+    },
+    {
+      title: "Words Learned",
+      value: data.total_words_learned,
+      icon: <Target className="h-8 w-8 text-muted-foreground" />,
+    },
+    {
+      title: "Current Level",
+      value: data.level_type || "B2",
+      icon: <TrendingUp className="h-8 w-8 text-muted-foreground" />,
+    },
+  ];
   console.log("Dashboard data:", data);
   return (
     <div className="space-y-6">
@@ -33,68 +56,24 @@ export default async function Page() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">
-            Welcome back, {data.username} 👋
+            Welcome back, {data.username}! 👋
           </h1>
           <p className="text-muted-foreground">
             Let's continue your English learning journey
           </p>
         </div>
-        {/* <Badge variant="secondary">7 day streak 🔥</Badge> */}
+        <Badge variant="secondary">7 day streak 🔥</Badge>
       </div>
-
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Lessons Completed
-                </p>
-                <p className="text-2xl font-bold">
-                  {data.total_lession_completed}
-                </p>
-              </div>
-              <BookOpen className="h-8 w-8 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Study Time</p>
-                <p className="text-2xl font-bold">{data.total_study_time}</p>
-              </div>
-              <Clock className="h-8 w-8 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Words Learned</p>
-                <p className="text-2xl font-bold">{data.total_words_learned}</p>
-              </div>
-              <Target className="h-8 w-8 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Current Level</p>
-                <p className="text-2xl font-bold">{data.level_type || "B2"}</p>
-              </div>
-              <TrendingUp className="h-8 w-8 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
+        {stats.map((stat, index) => (
+          <StatsCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            icon={stat.icon}
+          />
+        ))}
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">

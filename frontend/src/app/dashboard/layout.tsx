@@ -17,7 +17,9 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <div className="flex h-screen w-full">
         <AppSidebar className="h-full" />
-        <main className="flex-1 overflow-auto p-4">{children}</main>
+        <main className="flex-1 overflow-y-scroll overflow-x-hidden p-6 h-full">
+          {children}
+        </main>
       </div>
     </SidebarProvider>
   );

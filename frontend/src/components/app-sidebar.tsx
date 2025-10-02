@@ -42,7 +42,7 @@ const items = [
   },
   {
     id: "Flashcards",
-    url: "/dashboard/settings",
+    url: "/dashboard/flashcards",
     icon: Brain,
     description: "Memory Training",
   },
